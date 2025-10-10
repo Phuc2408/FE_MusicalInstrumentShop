@@ -36,7 +36,7 @@ export default function Slider() {
                 pagination={{ clickable: true }}
                 loop={true}
                 autoplay={{ delay: 3000 }}
-                className="h-full"
+                className="h-full pb-8"
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index}>

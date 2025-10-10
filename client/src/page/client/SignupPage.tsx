@@ -4,7 +4,7 @@ import SignupForm from "../../component/SignupForm";
 export default function LoginPage() {
     return (
         <Layout>
-            <SignupForm></SignupForm>
+            <SignupForm/>
         </Layout>
     )
 }
