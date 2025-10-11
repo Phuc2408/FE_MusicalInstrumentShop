@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 
 import Fender from "../assets/brand/Fender.avif"
 import Elixir from "../assets/brand/Elixir.avif"

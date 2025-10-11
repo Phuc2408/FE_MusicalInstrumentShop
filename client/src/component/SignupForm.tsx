@@ -6,7 +6,7 @@ import { FcGoogle } from 'react-icons/fc';
 export default function SignupForm() {
     const handleGoogleLogin = async()=>{}
     return (
-        <div className="flex justify-center items-center min-h-screen p-4"> 
+        <div className="flex justify-center items-center p-4"> 
             <form className="w-full max-w-xl p-8 space-y-4 bg-white border border-gray-200 rounded-xl shadow-xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <InputField label="First Name" required type="text" placeholder="Enter Your First Name" />

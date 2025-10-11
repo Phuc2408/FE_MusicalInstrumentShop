@@ -6,9 +6,9 @@ import { FcGoogle } from 'react-icons/fc';
 export default function LoginForm() {
     const handleGoogleLogin = async()=>{}
     return (
-        <div className="flex justify-center items-center min-h-screen p-4"> 
+        <div className="flex justify-center items-center p-4 "> 
             
-            <form className="w-full max-w-md p-8 space-y-6 rounded-xl shadow-xl">
+            <form className="w-full max-w-md p-8 space-y-6 bg-white border border-gray-200 rounded-xl shadow-xl">
                 
                 <InputField
                     label="Email Address"

@@ -3,12 +3,16 @@ import Slider from "../../component/Slider";
 import { Link } from "react-router-dom"; 
 import ProductLayout from "../../component/BestSellingProduct/ProductLayout";
 import BrandSlider from "../../component/BrandSlider";
+import Header from "../../component/Header/Header";
+import Footer from "../../component/Footer/Footer";
 
 import PedalBoard from "../../assets/banner/Pedalboard.webp"
 import Guitar_Amply from "../../assets/banner/Guitar_Amply.webp"
 
 export default function () {
     return (
+        <>
+            <Header/>
         <Layout>
             <Slider />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -39,5 +43,7 @@ export default function () {
             </h2>
             <BrandSlider/>
         </Layout>
+        <Footer/>
+        </>
     )
 }
