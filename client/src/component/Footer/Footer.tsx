@@ -5,7 +5,7 @@ import Newsletter from "./Newsletter";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gradient-to-b from-yellow-50 to-white border-t">
+    <footer className="bg-gradient-to-b from-yellow-50 to-white border-t border-gray-300">
       <div className="max-w-7xl mx-auto px-10 py-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
         <div className="justify-self-start">
           <FooterInfo />
