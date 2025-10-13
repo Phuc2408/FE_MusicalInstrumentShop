@@ -5,7 +5,7 @@ import SignupPage from './page/client/SignupPage'
 import HomePage from './page/client/Homepage';
 import AboutUsPage from "./page/client/AboutUsPage";
 import ProductPage from "./page/client/ProductPage";
-
+import ProductDetailPage from "./page/client/ProductDetailPage";
 
 function App() {
 
@@ -17,6 +17,7 @@ function App() {
         <Route path='/signup' element={<SignupPage />} />
         <Route path="/about-us" element={<AboutUsPage />} />      
         <Route path="/product" element={<ProductPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
 
       </Routes>
     </BrowserRouter>
