@@ -19,10 +19,9 @@ const CartPage: React.FC = () => {
       {/* Breadcrumb */}
       <Breadcrumb />
 
-      {/* 📦 Layout nội dung chính */}
+      {/* Layout nội dung chính */}
       <Layout>
-        <div className="max-w-6xl mx-auto px-4 py-1">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-[#A67C00] to-[#D4AF37] text-transparent bg-clip-text mb-6">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-[#A67C00] to-[#D4AF37] text-transparent bg-clip-text">
             Your Shopping Cart
           </h1>
           {cart.length === 0 ? (
@@ -48,7 +47,6 @@ const CartPage: React.FC = () => {
               <CartSummary total={total} onClear={clearCart} />
             </>
           )}
-        </div>
       </Layout>
 
       {/* Footer */}
