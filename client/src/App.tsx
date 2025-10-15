@@ -8,6 +8,8 @@ import ProductPage from "./page/client/ProductPage";
 import ProductDetailPage from "./page/client/ProductDetailPage";
 import ScrollToTop from './component/ScrollToTop';
 import DeliverInfoPage from './page/client/DeliveryInfoPage';
+import PrivacyPolicyPage from './page/client/PrivacyPolicyPage';
+import TermsConditionsPage from './page/client/TermsConditionsPage';
 
 function App() {
 
@@ -21,7 +23,9 @@ function App() {
         <Route path="/about-us" element={<AboutUsPage />} />      
         <Route path="/product" element={<ProductPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="/delivery" element={<DeliverInfoPage />} />
+        <Route path="/delivery-information" element={<DeliverInfoPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms-and-conditions" element={<TermsConditionsPage />} />
 
       </Routes>
     </BrowserRouter>
