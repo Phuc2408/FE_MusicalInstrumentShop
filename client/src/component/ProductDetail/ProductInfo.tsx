@@ -1,5 +1,6 @@
 import React from "react";
 import { ShoppingCart, Heart } from "lucide-react";
+import { useCart } from "../../context/CartContext"; 
 import type { SimpleProduct } from "../../sample/sample";
 
 interface Props {
@@ -7,6 +8,20 @@ interface Props {
 }
 
 const ProductInfo: React.FC<Props> = ({ product }) => {
+  const { addToCart } = useCart(); 
+
+  // Lấy ảnh đầu tiên (nếu có)
+  const firstImage =
+    typeof product.image === "string"
+      ? product.image
+      : product.image?.[0] || "/default-image.png";
+
+  // Parse giá sang number nếu đang là string
+  const parsedPrice =
+    typeof product.price === "string"
+      ? parseFloat(product.price.replace(/[^0-9.-]+/g, "")) || 0
+      : product.price;
+
   return (
     <div className="flex flex-col gap-4">
       {/* Product Title */}
@@ -24,11 +39,30 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
 
       {/* Buttons */}
       <div className="flex items-center gap-3 mt-3">
-        <button className="flex items-center gap-2 bg-black text-white py-2 px-5 rounded-lg hover:bg-gray-800 transition">
-          <ShoppingCart size={18} />
-          Add to Cart
-        </button>
+        {/* 🛒 Nút Add to Cart */}
+        <button
+  onClick={() =>
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: typeof product.price === "string"
+        ? parseFloat(product.price.replace(/[^0-9.-]+/g, "")) || 0
+        : product.price,
+      image:
+        typeof product.image === "string"
+          ? product.image
+          : product.image?.[0] || "/default-image.png",
+      quantity: 1,
+    })
+  }
+  className="flex items-center gap-2 bg-black text-white py-2 px-5 rounded-lg hover:bg-gray-800 transition"
+>
+  <ShoppingCart size={18} />
+  Add to Cart
+</button>
 
+
+        {/* ❤️ Wishlist */}
         <button className="flex items-center gap-2 border border-gray-300 py-2 px-5 rounded-lg hover:bg-gray-100 transition">
           <Heart size={18} />
           Wishlist

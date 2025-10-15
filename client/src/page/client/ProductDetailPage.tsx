@@ -8,6 +8,7 @@ import productData from "../../sample/sample";
 import ProductLayout from "../../component/BestSellingProduct/ProductLayout";
 import Layout from "../../component/Layout";
 
+
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const product = productData.sampleProducts.find((p) => p.id === Number(id));

@@ -17,7 +17,7 @@ const ContactUs: React.FC = () => {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#A67C00] to-[#D4AF37] text-transparent bg-clip-text">
             Get in touch with us
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 text-center mt-2">
             We’d love to hear from you — our support team is ready to assist with any questions.
           </p>
         </div>
