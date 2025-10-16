@@ -50,30 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <p className="text-xl font-bold text-red-600">{productPrice}</p>
           </div>
         </div>
-      </Link>
-
-      {/* Nút Add to Cart */}
-      <button
-        onClick={(e) => {
-          e.preventDefault(); // Ngăn Link bao quanh bị trigger
-          e.stopPropagation();
-          addToCart({
-            id: product.id,
-            name: product.name,
-            price: parsedPrice,
-            image: firstImage,
-            quantity: 1,
-          });
-        }}
-        disabled={product.status === "Hết hàng"}
-        className={`w-full mt-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-          product.status === "Hết hàng"
-            ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-            : "bg-[#A97132] text-white hover:bg-[#8c5e26]"
-        }`}
-      >
-        {product.status === "Hết hàng" ? "Hết hàng" : "Add to Cart"}
-      </button>
+      </Link>      
     </div>
   );
 }

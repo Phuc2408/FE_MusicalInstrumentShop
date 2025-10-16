@@ -3,6 +3,7 @@ import ProductGallery from "./ProductGallery";
 import ProductTabs from "./ProductSpec";
 import FAQSection from "./FAQSection";
 import { ShoppingCart, Heart } from "lucide-react";
+import { useCart } from "../../context/CartContext"; // ✅ import context
 import type { SimpleProduct } from "../../sample/sample";
 
 interface Props {
@@ -10,6 +11,14 @@ interface Props {
 }
 
 const ProductDetailMain: React.FC<Props> = ({ product }) => {
+  const { addToCart } = useCart(); // ✅ lấy context
+
+  // ✅ Lấy ảnh đầu tiên (nếu có)
+  const firstImage =
+    typeof product.image === "string"
+      ? product.image
+      : product.image?.[0] || "/default-image.png";
+
   return (
     <section className="w-full py-8">
       {/* Grid: Gallery + Info */}
@@ -33,11 +42,30 @@ const ProductDetailMain: React.FC<Props> = ({ product }) => {
 
             {/* Buttons */}
             <div className="flex items-center gap-3 mt-3">
-              <button className="flex items-center gap-2 bg-black text-white py-2 px-5 rounded-lg hover:bg-gray-800 transition">
+              {/* 🛒 Add to Cart */}
+              <button
+                onClick={() => {
+                  console.log("🧩 Clicked Add to Cart");
+                  addToCart({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: firstImage,
+                    quantity: 1,
+                  });
+                }}
+                disabled={product.status === "Hết hàng"}
+                className={`flex items-center gap-2 py-2 px-5 rounded-lg transition ${
+                  product.status === "Hết hàng"
+                    ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                    : "bg-black text-white hover:bg-gray-800"
+                }`}
+              >
                 <ShoppingCart size={18} />
-                Add to cart
+                {product.status === "Hết hàng" ? "Hết hàng" : "Add to cart"}
               </button>
 
+              {/* ❤️ Wishlist */}
               <button className="flex items-center gap-2 border border-gray-300 py-2 px-5 rounded-lg hover:bg-gray-100 transition">
                 <Heart size={18} />
                 Wishlist

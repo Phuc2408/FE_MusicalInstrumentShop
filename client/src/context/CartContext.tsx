@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, type ReactNode } from "reac
 export interface CartItem {
   id: number;
   name: string;
-  price: number;
+  price: string;
   image: string;
   quantity: number;
 }
@@ -28,6 +28,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const addToCart = (item: CartItem) => {
+    console.log("🛒 Add to cart called with:", item);
     setCart((prev) => {
       const existing = prev.find((p) => p.id === item.id);
       if (existing) {

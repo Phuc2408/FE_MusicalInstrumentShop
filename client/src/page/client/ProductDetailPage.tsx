@@ -8,7 +8,6 @@ import productData from "../../sample/sample";
 import ProductLayout from "../../component/BestSellingProduct/ProductLayout";
 import Layout from "../../component/Layout";
 
-
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const product = productData.sampleProducts.find((p) => p.id === Number(id));
@@ -27,22 +26,22 @@ const ProductDetailPage: React.FC = () => {
 
   return (
     <>
-      {/* Header */}
+      {/* 🧭 Header */}
       <Header />
 
-      {/* Breadcrumb */}
-        <Breadcrumb />
+      {/* 📍 Breadcrumb */}
+      <Breadcrumb />
 
-      {/* Main Content (Layout Wrapper) */}
+      {/* 📦 Nội dung chính (Layout chỉ là wrapper cho nội dung) */}
       <Layout>
-        {/* Product Detail */}
+        {/* Thông tin chi tiết sản phẩm */}
         <ProductDetailLayout product={product} />
 
-        {/* Best Selling / Related Products */}
-          <ProductLayout />
+        {/* Sản phẩm liên quan */}
+        <ProductLayout />
       </Layout>
 
-      {/* Footer */}
+      {/* 🦶 Footer */}
       <Footer />
     </>
   );
