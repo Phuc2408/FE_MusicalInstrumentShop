@@ -1,32 +1,54 @@
-import axios from "axios";
+import axios, { type AxiosInstance } from "axios";
 
-const instance = axios.create({
+export function createApi({
+  baseURL,
+  getToken,
+  onUnauthorized,
+}: {
+  baseURL: string;
+  getToken?: () => string | null;
+  onUnauthorized?: () => void;
+}): AxiosInstance {
+  const api = axios.create({
+    baseURL,
+    timeout: 20000,
+  });
+
+  api.interceptors.request.use(
+    (config) => {
+      const token = getToken ? getToken() : null;
+      if (token) config.headers["Authorization"] = `Bearer ${token}`;
+      return config;
+    },
+    (error) => Promise.reject(error)
+  );
+
+  api.interceptors.response.use(
+    (res) => (res && res.data ? res.data : res),
+    (err) => {
+      if (err?.response?.status === 401 && onUnauthorized) {
+        onUnauthorized();
+      }
+      return err?.response?.data ?? Promise.reject(err);
+    }
+  );
+
+  return api;
+}
+
+export const clientApi = createApi({
   baseURL: import.meta.env.VITE_BACKEND_URL,
+  getToken: () => localStorage.getItem("access_token"),
+  onUnauthorized: () => {
+    window.location.href = "/login";
+  },
 });
 
-instance.interceptors.request.use(
-  function (config) {
-    const token = localStorage.getItem("access_token");
-    const auth = token ? `Bearer ${token}` : "";
-    config.headers["Authorization"] = auth;
-    return config;
+export const adminApi = createApi({
+  baseURL:
+    import.meta.env.VITE_ADMIN_BACKEND_URL ?? import.meta.env.VITE_BACKEND_URL,
+  getToken: () => localStorage.getItem("admin_access_token"),
+  onUnauthorized: () => {
+    window.location.href = "/admin/login";
   },
-  function (error) {
-    return Promise.reject(error);
-  }
-);
-
-instance.interceptors.response.use(
-  function (response) {
-    if (response && response?.data) return response.data;
-    return response;
-  },
-  function (error) {
-    if (error && error.response && error.response.data) {
-      return error.response.data;
-    }
-    return Promise.reject(error);
-  }
-);
-
-export default instance;
+});
