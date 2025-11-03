@@ -31,7 +31,7 @@ export interface IRegisterResponse {
   address: string | null;
   dob: string | null;
   refreshTokenHash: string | null;
-  role: "customer" | "admin" | "staff";
+  role: "customer" | "admin"; 
   loginMethod: "local" | "google";
   createdAt: string;
   updatedAt: string;
