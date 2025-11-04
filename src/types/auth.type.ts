@@ -23,6 +23,20 @@ export interface IRegisterRequest{
     dob?: string;
 }
 
+export interface IGoogleLoginRequest {
+  code: string;
+}
+
+export interface IGoogleLoginResponse { 
+  access_token: string;
+  refresh_token: string;
+  user: User;
+}
+interface User {
+  email: string;
+  full_name: string;
+}
+
 export interface IRegisterResponse {
   user_id: number;
   full_name: string;

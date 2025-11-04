@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from "react";
-import { localLoginAPI } from "../services/client/auth.api";
-import type { ILoginRequest, ILoginResponse } from "../types/auth.type";
+import { googleLoginAPI, localLoginAPI } from "../services/client/auth.api";
+import type { IGoogleLoginRequest, IGoogleLoginResponse, ILoginRequest, ILoginResponse } from "../types/auth.type";
+import type { IBackendRes } from "../types/common.type";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
@@ -36,10 +37,40 @@ export default function LoginForm() {
         }
         catch (err: any) {
             setError(err.message);
+            console.error("Google login error:", error);
         }
     }
 
-    const handleGoogleLogin = async()=>{}
+    const handleGoogleLogin = useGoogleLogin({
+        flow: 'auth-code',
+        onSuccess: async tokenResponse => {
+            console.log('Google login success:', tokenResponse.code);
+            const tokenRequest:IGoogleLoginRequest = { code: tokenResponse.code };
+            try {
+                const response: IBackendRes<IGoogleLoginResponse> = await googleLoginAPI(tokenRequest);
+                if (response.error || !response.data) {
+                    console.error("Error:", response.message);
+                    alert(response.message);
+                    return;
+                }
+                const data: IGoogleLoginResponse = response.data;
+                localStorage.setItem('user', JSON.stringify({
+                    access_token: data?.access_token,
+                    refresh_token: data?.refresh_token,
+                    user: data?.user
+                }
+                ));
+                navigate('/');
+            }
+            catch (err: any) {
+                setError(err.message);
+                console.error("Google login error:", error);
+            }
+        },
+        onError: error => {
+            console.log('Google login failed:', error);
+        },
+    });
     return (
         <div className="flex justify-center items-center p-4 "> 
             
