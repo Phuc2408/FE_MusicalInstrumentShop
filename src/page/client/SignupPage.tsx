@@ -1,5 +1,5 @@
 import Layout from "../../component/Layout";
-import SignupForm from "../../component/SignupForm";
+import SignupForm from "../../component/Auth/SignupForm"
 import Header from "../../component/Header/Header";
 import Footer from "../../component/Footer/Footer";
 

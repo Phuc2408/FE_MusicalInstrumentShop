@@ -2,7 +2,8 @@ import Header from "../../component/Header/Header";
 import Breadcrumb from "../../component/Breadcrumb";
 import Footer from "../../component/Footer/Footer";
 import Layout from "../../component/Layout"; // 👈 Thêm dòng này
-import Aboutus from "../../assets/Aboutus.jpg";
+import Aboutus from "../../../src/assets/Aboutus.jpg"
+import React from "react";
 
 export default function AboutUsPage() {
   return (

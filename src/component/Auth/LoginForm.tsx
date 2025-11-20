@@ -1,14 +1,14 @@
-import InputField from "./InputField";
+import InputField from "./InputField"
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from "react";
-import { googleLoginAPI, localLoginAPI } from "../services/client/auth.api";
-import type { IGoogleLoginRequest, IGoogleLoginResponse, ILoginRequest, ILoginResponse } from "../types/auth.type";
-import { useAuth } from "../context/AuthContext";
-import type { CartItem, IInitialCartSyncRequest, IInitialCartSyncResponse } from "../types/cart.type";
-import { initialCartSyncAPI } from "../services/client/cart.api";
-import { useCart } from "../context/CartContext";
+import { googleLoginAPI, localLoginAPI } from "../../services/client/auth.api";
+import type { IGoogleLoginRequest, IGoogleLoginResponse, ILoginRequest, ILoginResponse } from "../../types/auth.type";
+import { useAuth } from "../../context/AuthContext";
+import type { CartItem, IInitialCartSyncRequest, IInitialCartSyncResponse } from "../../types/cart.type";
+import { initialCartSyncAPI } from "../../services/client/cart.api";
+import { useCart } from "../../context/CartContext";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");

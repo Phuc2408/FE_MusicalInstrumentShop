@@ -13,6 +13,8 @@ import ContactUsPage from './page/client/ContactUsPage';
 import CartPage from './page/client/CartPage';
 import ScrollToTop from './component/ScrollToTop';
 import { CartProvider } from './context/CartContext';
+import ForgotPasswordPage from './page/client/ForgotPasswordPage';
+import ResetPasswordPage from './page/client/ResetPasswordPage';
 
 function App() {
   return (
@@ -32,6 +34,9 @@ function App() {
           <Route path="/terms-and-conditions" element={<TermsConditionsPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+
         </Routes>
       </CartProvider>
     </BrowserRouter>
