@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
 import type { IProduct } from "../types/product.type";
-// 💡 CẦN IMPORT các interface IProduct, IBrand, IProductImage từ file định nghĩa của bạn
 
 
 // 💡 SỬ DỤNG IProduct LÀM KIỂU PROP
@@ -10,36 +8,25 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addToCart } = useCart();
 
-  // 💡 CẬP NHẬT LOGIC LẤY DỮ LIỆU TỪ IProduct
-  
   // Lấy tên Brand từ IBrand
   const brandName = product.brand?.name || "Brand không rõ";
-  
+
   // Lấy tên sản phẩm
   const productName = product.product_name || "Sản phẩm không tên";
-  
+
   // Lấy giá hiển thị (đã có đơn vị tiền tệ)
   const productPrice = product.price_display || "Liên hệ";
-  
+
   // Lấy ảnh đầu tiên từ mảng 'images' (giả định IProductImage có trường image_url)
-  const firstImage = product.images?.[0]?.image_url || "/default-image.png"; 
+  const firstImage = product.images?.[0]?.image_url || "/default-image.png";
 
   // Xác định trạng thái dựa trên stock_quantity
   const productStatus = product.stock_quantity > 0 ? "Có hàng" : "Hết hàng";
-  
-  // Hàm xử lý khi click nút "Thêm vào giỏ hàng" (Nếu cần)
-  const handleAddToCart = (e: React.MouseEvent) => {
-      e.preventDefault(); 
-      e.stopPropagation(); 
-      // addToCart(product); 
-      console.log(`Đã thêm ${productName} vào giỏ hàng.`);
-  }
 
   return (
     <div className="group bg-white p-3 border border-gray-100 rounded-xl shadow-sm cursor-pointer h-full flex flex-col hover:shadow-md transition-all">
-      <Link to={`/products/${product.slug}`}state={{ productData: product }} className="flex flex-col flex-grow">
+      <Link to={`/products/${product.slug}`} state={{ productData: product }} className="flex flex-col flex-grow">
         <div className="relative mb-3 aspect-square overflow-hidden flex items-center justify-center">
           <img
             src={firstImage}
@@ -48,7 +35,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           />
           {productStatus === "Hết hàng" && (
             <span className="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
-                Hết hàng
+              Hết hàng
             </span>
           )}
         </div>
@@ -63,9 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
       </Link>
-      
-      {/* Nút Giỏ hàng (Tùy chọn) */}
-      {/* ... */}
+
     </div>
   );
 }

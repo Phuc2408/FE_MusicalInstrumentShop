@@ -6,11 +6,11 @@ import Footer from "../../component/Footer/Footer";
 export default function LoginPage() {
     return (
         <>
-            <Header/>
+            <Header />
             <Layout>
-                <LoginForm/>
+                <LoginForm />
             </Layout>
-            <Footer/>
+            <Footer />
         </>
     )
 }

@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { X, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { groupCategoriesForMenu } from "../../../utils/categoryUtils"; 
+import { groupCategoriesForMenu } from "../../../utils/categoryUtils";
 import type { ICategoryItem, IParentCategory } from "../../../types/product.type";
 import { getAllCategoryAPI } from "../../../services/client/product.api";
 
 interface CategoryDrawerProps {
-  open: boolean;
-  onClose: () => void;
+    open: boolean;
+    onClose: () => void;
 }
 
 const fetchCategories = async (): Promise<ICategoryItem[]> => {
     try {
-        // --- CHỈNH SỬA TẠI ĐÂY ---
-        // getAllCategoryAPI() giờ trả về Promise<ICategoryItem[]>, không cần .data
+
         const response: ICategoryItem[] = await getAllCategoryAPI();
         return response || [];
-        
+
     } catch (error) {
         console.error("Lỗi khi gọi API danh mục:", error);
         return [];
@@ -36,7 +35,7 @@ const CategoryDrawer: React.FC<CategoryDrawerProps> = ({ open, onClose }) => {
             setLoading(true);
             fetchCategories()
                 .then(flatData => {
-                    const grouped = groupCategoriesForMenu(flatData); 
+                    const grouped = groupCategoriesForMenu(flatData);
                     setGroupedCategories(grouped);
                     if (grouped.length > 0) {
                         setActiveParent(grouped[0]);
@@ -64,16 +63,14 @@ const CategoryDrawer: React.FC<CategoryDrawerProps> = ({ open, onClose }) => {
     return (
         <>
             <div
-                className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${
-                    open ? "opacity-100 visible" : "opacity-0 invisible"
-                }`}
+                className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${open ? "opacity-100 visible" : "opacity-0 invisible"
+                    }`}
                 onClick={onClose}
             />
 
             <div
-                className={`fixed top-0 left-0 h-full w-[800px] bg-white shadow-xl z-50 transform transition-transform duration-300 ${
-                    open ? "translate-x-0" : "-translate-x-full"
-                }`}
+                className={`fixed top-0 left-0 h-full w-[800px] bg-white shadow-xl z-50 transform transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"
+                    }`}
             >
                 <div className="flex items-center justify-between p-4 border-b border-gray-200">
                     <h2 className="text-lg font-semibold text-gray-800">All Categories</h2>
@@ -83,7 +80,7 @@ const CategoryDrawer: React.FC<CategoryDrawerProps> = ({ open, onClose }) => {
                 </div>
 
                 <div className="flex h-[calc(100%-60px)]">
-                    
+
                     <div className="w-1/2 border-r border-gray-200 p-4 overflow-y-auto">
                         {loading && (
                             <div className="text-center p-4 text-gray-500">Đang tải danh mục...</div>
@@ -96,8 +93,8 @@ const CategoryDrawer: React.FC<CategoryDrawerProps> = ({ open, onClose }) => {
                                         onMouseEnter={() => setActiveParent(parent)}
                                         onClick={() => handleActivateParent(parent)}
                                         className={`flex justify-between items-center py-2 px-3 rounded-md cursor-pointer transition 
-                                            ${activeParent?.id === parent.id 
-                                                ? 'bg-orange-50 text-orange-700 font-semibold' 
+                                            ${activeParent?.id === parent.id
+                                                ? 'bg-orange-50 text-orange-700 font-semibold'
                                                 : 'hover:bg-gray-100 text-gray-700'
                                             }`}
                                     >

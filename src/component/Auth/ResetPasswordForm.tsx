@@ -1,14 +1,20 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import InputField from "./InputField"; // Đảm bảo rằng InputField có xử lý lỗi
+import type { IResetPasswordRequest } from "../../types/auth.type";
+import { resetPasswordAPI } from "../../services/client/auth.api";
 
 export default function ResetPasswordForm() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const token = searchParams.get('token');
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
         setSuccess(null);
@@ -24,13 +30,28 @@ export default function ResetPasswordForm() {
             return;
         }
 
-        // Xử lý logic gọi API reset password tại đây
-        // await resetPasswordAPI(password)... 
+        try {
 
-        // Giả lập thành công
-        setSuccess("Your password has been reset successfully!");
-        // setPassword(""); // Clear password inputs if needed
-        // setConfirmPassword(""); // Clear confirm password input if needed
+            const data: IResetPasswordRequest = {
+                token: token!,
+                newPassword: password,
+            }
+
+            const response = await resetPasswordAPI(data)
+
+            if (response) {
+                setSuccess("Your password has been reset successfully!");
+                setPassword("");
+                setConfirmPassword("");
+            }
+        }
+        catch (err) {
+            console.log(err)
+            setError('Change password fail please try again')
+            setPassword("");
+            setConfirmPassword("");
+            navigate('/login');
+        }
     };
 
     return (

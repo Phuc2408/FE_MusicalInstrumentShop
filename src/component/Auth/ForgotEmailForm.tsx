@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import InputField from "./InputField";
+import { forgotPasswordAPI } from "../../services/client/auth.api";
+import type { IForgotPasswordRequest } from "../../types/auth.type";
 
 export default function ForgotPasswordForm() {
     const [email, setEmail] = useState("");
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
         setSuccess(null);
@@ -23,12 +25,19 @@ export default function ForgotPasswordForm() {
             return;
         }
 
-        // Xử lý logic gọi API gửi mail tại đây
-        // await forgotPasswordAPI(email)...
+        try {
+            const data: IForgotPasswordRequest = {
+                email: email
+            }
+            const response = await forgotPasswordAPI(data)
 
-        // Giả lập thành công
-        setSuccess("The instruction has been sent to your email!");
-        // setEmail(""); // Có thể clear input nếu muốn
+            if (response) {
+                setSuccess("The instruction has been sent to your email!");
+            }
+        }
+        catch (err) {
+            setError("Email can be not existed")
+        }
     };
 
     return (
