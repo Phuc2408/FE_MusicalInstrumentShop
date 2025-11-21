@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
-import type { UserData } from '../types/auth.type'; 
+import type { UserData } from '../types/auth.type';
 import { logoutAPI } from '../services/client/auth.api';
 
 
@@ -13,8 +13,8 @@ export const forceLogout = () => {
     localStorage.removeItem("user_data");
     sessionStorage.removeItem("access_token");
     sessionStorage.removeItem("refresh_token");
-    sessionStorage.removeItem("user_data"); 
-    
+    sessionStorage.removeItem("user_data");
+
     window.location.href = "/login";
 };
 
@@ -22,9 +22,9 @@ export interface AuthContextType {
     isLoggedIn: boolean;
     user: UserData | null;
     login: (
-        accessToken: string, 
+        accessToken: string,
         refreshToken: string,
-        rememberMe: boolean, 
+        rememberMe: boolean,
         user: UserData
     ) => void;
     logout: () => void;
@@ -56,7 +56,7 @@ const getInitialAuth = (): { isLoggedIn: boolean, user: UserData | null } => {
         token = localStorage.getItem('access_token');
         if (token) user = getStoredUser(localStorage);
     }
- 
+
     return {
         isLoggedIn: !!token,
         user: user
@@ -67,34 +67,34 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const initial = getInitialAuth();
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(initial.isLoggedIn);
     const [user, setUser] = useState<UserData | null>(initial.user);
- 
+
 
     const login = (
-        accessToken: string, 
-        refreshToken: string, 
-        rememberMe: boolean, 
+        accessToken: string,
+        refreshToken: string,
+        rememberMe: boolean,
         userData: UserData
     ) => {
         const storage = rememberMe ? localStorage : sessionStorage;
- 
+
         storage.setItem("access_token", accessToken);
         storage.setItem("refresh_token", refreshToken);
-        storage.setItem("user_data", JSON.stringify(userData)); 
+        storage.setItem("user_data", JSON.stringify(userData));
 
 
         setIsLoggedIn(true);
         setUser(userData);
     };
-    
+
     const logout = async () => {
         try {
-            await logoutAPI(); 
+            await logoutAPI();
         } catch (e) {
             console.warn("Lỗi khi hủy token trên server. Tiếp tục dọn dẹp cục bộ.", e);
         }
- 
+
         // Gọi hàm forceLogout để dọn dẹp và điều hướng
-        forceLogout(); 
+        forceLogout();
 
         setIsLoggedIn(false);
         setUser(null);

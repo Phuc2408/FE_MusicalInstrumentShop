@@ -1,16 +1,16 @@
 import Layout from "../../component/Layout";
-import LoginForm from "../../component/Auth/LoginForm"
+import ForgotEmailForm from "../../component/Auth/ForgotEmailForm";
 import Header from "../../component/Header/Header";
 import Footer from "../../component/Footer/Footer";
 
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
     return (
         <>
             <Header />
             <Layout>
-                <LoginForm />
+                <ForgotEmailForm />
             </Layout>
             <Footer />
         </>
-    )
+    );
 }

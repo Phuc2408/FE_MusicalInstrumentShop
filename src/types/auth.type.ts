@@ -48,15 +48,19 @@ export interface IResetPasswordRequest {
 // B. PHẢN HỒI (RESPONSES)
 // -----------------------------------------------------------------
 
+export interface IForgotPasswordResponse {
+    message: string;
+}
+
 // Cấu trúc phản hồi chung cho Đăng nhập/Google Login
 export interface IAuthResponseData {
     access_token: string;
     refresh_token: string;
-    user: UserData; 
+    user: UserData;
 }
 
-export interface ILoginResponse extends IAuthResponseData {}
-export interface IGoogleLoginResponse extends IAuthResponseData {}
+export interface ILoginResponse extends IAuthResponseData { }
+export interface IGoogleLoginResponse extends IAuthResponseData { }
 
 
 // Phản hồi Đăng ký (IRegisterResponse)
@@ -64,8 +68,8 @@ export interface IRegisterResponse {
     user_id: number;
     full_name: string;
     email: string;
-    role: "customer" | "admin"; 
-    
+    role: "customer" | "admin";
+
     googleId: string | null;
     phone: string | null;
     address: string | null;
