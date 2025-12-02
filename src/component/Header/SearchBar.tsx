@@ -3,6 +3,14 @@ import { Search } from "lucide-react";
 import type { ISearchResponse } from "../../types/product.type";
 import { searchAPI } from "../../services/client/product.api";
 import { useDebounce } from "../../hooks/useRebounce";
+import { useNavigate } from "react-router-dom";
+
+interface ICollection {
+  id: number;
+  name: string;
+  slug: string;
+  type: string;
+}
 
 const SearchBar: React.FC = () => {
   const [value, setValue] = useState("");
@@ -12,6 +20,16 @@ const SearchBar: React.FC = () => {
   });
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const getCollectionUrl = (c: ICollection) => {
+    if (c.type === "brand") {
+      return `/products/brands/${c.slug}`;
+    }
+    else {
+      return `/products/categories/${c.slug}`;
+    }
+  }
 
   const debouncedSearch = useDebounce(async (q: string) => {
     if (!q.trim()) {
@@ -90,6 +108,12 @@ const SearchBar: React.FC = () => {
                   <button
                     key={c.id}
                     type="button"
+                    onClick={() => {
+                      setOpen(false);
+                      setValue("");
+                      const url = getCollectionUrl(c);
+                      navigate(url);
+                    }}
                     className="w-full text-left px-3 py-1.5 text-sm hover:bg-[#F4E4B6] border-b border-[#E9D7A4] last:border-b-0"
                   >
                     <span className="font-semibold">{c.name}</span>
@@ -102,6 +126,11 @@ const SearchBar: React.FC = () => {
                   <button
                     key={p.id}
                     type="button"
+                    onClick={() => {
+                      setOpen(false);
+                      setValue("");
+                      navigate(`/products/${p.slug}`);
+                    }}
                     className="w-full text-left px-3 py-1.5 text-sm hover:bg-[#F4E4B6] border-b border-[#E9D7A4] last:border-b-0"
                   >
                     <span className="font-semibold">{p.product_name}</span>
