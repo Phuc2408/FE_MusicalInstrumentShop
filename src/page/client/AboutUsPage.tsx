@@ -1,10 +1,8 @@
 import Header from "../../component/Header/Header";
 import Breadcrumb from "../../component/Breadcrumb";
 import Footer from "../../component/Footer/Footer";
-import Layout from "../../component/Layout"; // 👈 Thêm dòng này
+import Layout from "../../component/Layout";
 import Aboutus from "../../../src/assets/Aboutus.jpg"
-import React from "react";
-
 export default function AboutUsPage() {
   return (
     <div className="bg-white min-h-screen flex flex-col">
@@ -16,8 +14,8 @@ export default function AboutUsPage() {
       <Layout>
         {/* Title */}
         <h1 className="text-3xl font-bold bg-gradient-to-r from-[#A67C00] to-[#D4AF37] text-transparent bg-clip-text">
-            About Solar Strings
-          </h1>
+          About Solar Strings
+        </h1>
 
         {/* --- Main Content --- */}
         <div className="grid md:grid-cols-2 gap-8 items-start">

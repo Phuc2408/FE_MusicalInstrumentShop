@@ -2,7 +2,7 @@ import InputField from "./InputField";
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import { FcGoogle } from 'react-icons/fc';
-import type { IGoogleLoginRequest, IGoogleLoginResponse, IRegisterRequest, IRegisterResponse } from "../../types/auth.type";
+import type { IGoogleLoginRequest, IGoogleLoginResponse, IRegisterRequest } from "../../types/auth.type";
 import { googleLoginAPI, registerAPI } from "../../services/client/auth.api";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
@@ -69,7 +69,7 @@ export default function SignupForm() {
 
                 await handleInitialCartSync();
 
-                navigate('/');
+                window.location.href = '/';
             }
             catch (err: any) {
                 // Tương tự, lấy lỗi trực tiếp từ object lỗi (errorData)

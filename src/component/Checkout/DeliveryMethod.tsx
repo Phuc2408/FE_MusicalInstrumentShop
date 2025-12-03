@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   method: "free" | "flat";
   setMethod: (val: "free" | "flat") => void;
@@ -24,7 +22,7 @@ export default function DeliveryMethod({ method, setMethod }: Props) {
           <span className="text-sm font-bold text-gray-600">Free</span>
         </label>
 
-        
+
       </div>
     </div>
   );
