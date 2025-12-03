@@ -1,5 +1,5 @@
 import InputField from "./InputField"
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from "react";
@@ -15,7 +15,6 @@ export default function LoginForm() {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const navigate = useNavigate();
     const { login } = useAuth();
     const { setCart } = useCart();
 
@@ -60,7 +59,7 @@ export default function LoginForm() {
 
                 await handleInitialCartSync();
 
-                navigate("/");
+                window.location.href = '/';
             }
             else {
                 setError("Login failed: No data received");
@@ -90,7 +89,7 @@ export default function LoginForm() {
 
                 await handleInitialCartSync();
 
-                navigate('/');
+                window.location.href = '/';
             }
             catch (err: any) {
                 // Tương tự, lấy lỗi trực tiếp từ object lỗi (errorData)

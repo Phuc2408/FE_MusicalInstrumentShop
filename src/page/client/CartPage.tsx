@@ -15,15 +15,15 @@ const CartPage: React.FC = () => {
       <Breadcrumb />
 
       <Layout>
-      <h1 className="text-3xl font-bold bg-gradient-to-r from-[#A67C00] to-[#D4AF37] text-transparent bg-clip-text">
-            Your Shopping Cart
-          </h1>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-[#A67C00] to-[#D4AF37] text-transparent bg-clip-text">
+          Your Shopping Cart
+        </h1>
 
         <CartContent />
         <ProductLayout />
-        <BrandSlider/>
+        <BrandSlider />
       </Layout>
-      
+
       <Footer />
     </>
   );
