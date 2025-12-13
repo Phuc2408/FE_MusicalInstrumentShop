@@ -33,7 +33,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className="group bg-white p-3 border border-gray-100 rounded-xl shadow-sm cursor-pointer h-full flex flex-col hover:shadow-md transition-all">
-      <Link to={`/products/${product.slug}`} state={{ productData: product }} className="flex flex-col flex-grow">
+      <Link to={`/products/${product.slug}`} className="flex flex-col flex-grow">
         <div className="relative mb-3 aspect-square overflow-hidden flex items-center justify-center">
           <img
             src={image}
